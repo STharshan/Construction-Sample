@@ -51,12 +51,11 @@ export default function ServicesSection() {
                         return (
                             <div
                                 key={index}
-                                // Added active: scale changes for haptic-like finger tracking on mobile screens
                                 className="group relative flex min-h-90 flex-col overflow-hidden rounded-[28px] border bg-white p-8 shadow-[0_14px_34px_rgba(15,23,42,0.06)] transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(0,0,0,0.14)] active:scale-[0.99] active:shadow-[0_22px_60px_rgba(0,0,0,0.14)]"
                                 style={{ borderColor: "rgba(16,17,20,0.08)" }}
                             >
-                                {/* Background Image container reacts to hover OR active touch down flags */}
-                                <div className="absolute inset-0 z-0 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-active:opacity-100">
+                                {/* Background Image container with bottom-to-top slide reveal */}
+                                <div className="absolute inset-0 z-0 opacity-0 transition-all duration-500 ease-out translate-y-4 scale-105 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-active:opacity-100 group-active:translate-y-0 group-active:scale-100">
                                     <img
                                         src={service.image}
                                         alt={`${service.title} by ${branding.companyName}`}
@@ -84,7 +83,6 @@ export default function ServicesSection() {
                                             <Icon size={24} />
                                         </div>
 
-                                        {/* Added matching group-active color transformations so text changes instantly on touch */}
                                         <h3
                                             className="mb-4 max-w-60 text-[22px] font-bold leading-[1.18] transition-colors duration-500 group-hover:text-white group-active:text-white"
                                             style={{ color: "var(--theme-heading)" }}
@@ -115,7 +113,7 @@ export default function ServicesSection() {
                                             >
                                                 <ArrowUpRight
                                                     size={16}
-                                                    className="transition-transform duration-800 ease-out group-hover:rotate-45 group-active:rotate-45"
+                                                    className="transition-transform duration-500 ease-out group-hover:rotate-45 group-active:rotate-45"
                                                 />
                                             </span>
                                         </button>
@@ -129,7 +127,6 @@ export default function ServicesSection() {
                                     />
                                 </div>
 
-                                {/* Updated CSS custom handlers to listen for modern responsive touch triggers */}
                                 <style>{`
                                     .group:hover .service-icon,
                                     .group:hover .service-arrow,

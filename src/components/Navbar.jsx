@@ -53,7 +53,7 @@ const Navbar = ({ overlay = false }) => {
               smooth
               to={`/#${link.href}`}
               scroll={handleScroll}
-              className="transition-colors duration-200 hover:text-[var(--theme-accent-strong)]"
+              className="transition-colors duration-200 hover:text-(--theme-accent-strong)"
             >
               {link.label}
             </HashLink>
@@ -64,7 +64,7 @@ const Navbar = ({ overlay = false }) => {
         <div className="hidden items-center gap-6 xl:flex">
           <a
             href={branding.primaryCtaHref}
-            className={`group inline-flex items-center gap-3 rounded-full font-semibold text-white transition-all duration-200 hover:bg-[var(--theme-accent-strong)] hover:text-[var(--theme-primary-strong)] ${
+            className={`group inline-flex items-center gap-3 rounded-full font-semibold text-white transition-all duration-200 hover:bg-(--theme-accent-strong) hover:text-(--theme-primary-strong) ${
               overlay ? "px-6 py-3 text-sm lg:px-8 lg:text-base" : "px-6 py-3"
             }`}
             style={{ backgroundColor: "var(--theme-accent)" }}
@@ -104,7 +104,7 @@ const Navbar = ({ overlay = false }) => {
               smooth
               to={`/#${link.href}`}
               scroll={handleScroll}
-              className="w-full text-center font-medium transition-colors duration-200 py-1 active:text-[var(--theme-accent-strong)]"
+              className="w-full text-center font-medium transition-colors duration-200 py-1 active:text-(--theme-accent-strong)"
             >
               {link.label}
             </HashLink>
@@ -113,7 +113,7 @@ const Navbar = ({ overlay = false }) => {
           {/* Mobile Target CTA with active touch press effect */}
           <a
             href={branding.primaryCtaHref}
-            className={`group inline-flex items-center justify-center gap-3 rounded-full font-semibold text-white transition-all duration-200 active:scale-[0.98] active:bg-[var(--theme-accent-strong)] active:text-[var(--theme-primary-strong)] ${
+            className={`group inline-flex items-center justify-center gap-3 rounded-full font-semibold text-white transition-all duration-200 active:scale-[0.98] active:bg-(--theme-accent-strong) active:text-(--theme-primary-strong)] ${
               overlay ? "mt-2 w-full py-3 text-sm" : "px-5 py-3 w-full"
             }`}
             style={{ backgroundColor: "var(--theme-accent)" }}
