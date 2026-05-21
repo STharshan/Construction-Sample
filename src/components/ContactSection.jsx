@@ -39,7 +39,7 @@ export default function ContactSection() {
               </div>
 
               <h2
-                className="mt-8 max-w-[620px] text-[2.7rem] font-semibold leading-[0.98] tracking-tight sm:text-[3.2rem]"
+                className="mt-8 max-w-155 text-[2.7rem] font-semibold leading-[0.98] tracking-tight sm:text-[3.2rem]"
                 style={{ color: "var(--theme-heading)" }}
               >
                 {contact.heading.lineOne}
@@ -49,7 +49,7 @@ export default function ContactSection() {
               </h2>
 
               <p
-                className="mt-8 max-w-[560px] text-lg leading-8"
+                className="mt-8 max-w-140 text-lg leading-8"
                 style={{ color: "var(--theme-text-muted)" }}
               >
                 {contact.description}
@@ -116,7 +116,7 @@ export default function ContactSection() {
             </div>
           </div>
 
-          <div className="rounded-[32px] bg-white p-6 shadow-[0_24px_60px_rgba(15,23,42,0.06)] sm:p-8 lg:p-10 xl:p-14">
+          <div className="rounded-4xl bg-white p-6 shadow-[0_24px_60px_rgba(15,23,42,0.06)] sm:p-8 lg:p-10 xl:p-14">
             <form className="space-y-7">
               <div className="grid gap-6 md:grid-cols-2">
                 <label className="block">

@@ -14,7 +14,7 @@ export default function FooterSection() {
       <div className="app-container">
         <div className="grid gap-12 border-b border-white/12 pb-14 sm:grid-cols-2 xl:grid-cols-4 xl:gap-16">
           <div>
-            <h2 className="max-w-[280px] text-[1.5rem] font-semibold uppercase leading-[1.2] tracking-[0.03em]">
+            <h2 className="max-w-70 text-[1.5rem] font-semibold uppercase leading-[1.2] tracking-[0.03em]">
               {footer.introTitle}
             </h2>
             <p className="mt-10 max-w-[320px] text-[1.05rem] leading-9 text-white/74">

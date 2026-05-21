@@ -34,7 +34,7 @@ const Navbar = ({ overlay = false }) => {
       <div
         className={`app-container flex items-center justify-between ${
           overlay
-            ? "rounded-[1.4rem] border px-4 py-4 shadow-[0_20px_60px_rgba(15,23,42,0.15)] sm:rounded-[2rem] sm:px-8 lg:rounded-[2.6rem] lg:px-10"
+            ? "rounded-[1.4rem] border px-4 py-4 shadow-[0_20px_60px_rgba(15,23,42,0.15)] sm:rounded-4xl sm:px-8 lg:rounded-[2.6rem] lg:px-10"
             : "rounded-full border px-4 py-3 shadow-[0_18px_60px_rgba(15,23,42,0.16)] backdrop-blur-md sm:px-7 lg:px-10"
         }`}
         style={{
@@ -105,8 +105,8 @@ const Navbar = ({ overlay = false }) => {
         <div
           className={`app-container mt-3 flex flex-col gap-4 px-6 shadow-[0_20px_60px_rgba(15,23,42,0.14)] xl:hidden ${
             overlay
-              ? "rounded-[2rem] border py-6 text-base"
-              : "items-center rounded-[2rem] border py-6 text-lg"
+              ? "rounded-4xl border py-6 text-base"
+              : "items-center rounded-4xl border py-6 text-lg"
           }`}
           style={{
             backgroundColor: "var(--theme-surface)",

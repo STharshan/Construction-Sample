@@ -68,7 +68,7 @@ const HeroSection = () => {
       <div className="app-section relative z-10 flex min-h-screen w-full items-end pb-10 pt-36 sm:pb-12 sm:pt-40 lg:pb-14 lg:pt-44">
         <div className="app-container">
           <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(560px,0.95fr)] lg:items-end">
-            <div className="max-w-[760px] text-left">
+            <div className="max-w-190 text-left">
               <div
                 className="hero-reveal inline-flex max-w-full items-center gap-2 rounded-full bg-gray-900/88 px-4 py-3 text-xs font-semibold text-white shadow-[0_16px_32px_rgba(0,0,0,0.24)] backdrop-blur-sm sm:gap-3 sm:px-5 sm:text-sm"
                 style={{ animationDelay: "0.08s" }}
@@ -112,7 +112,7 @@ const HeroSection = () => {
                     </p>
 
                     {index < hero.stats.length - 1 && (
-                      <div className="absolute right-0 top-1/2 hidden h-20 w-[1px] -translate-y-1/2 rotate-[15deg] bg-white/12 sm:block" />
+                      <div className="absolute right-0 top-1/2 hidden h-20 w-px -translate-y-1/2 rotate-15 bg-white/12 sm:block" />
                     )}
                   </div>
                 ))}

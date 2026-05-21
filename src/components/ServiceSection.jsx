@@ -37,7 +37,7 @@ export default function ServicesSection() {
                     </div>
 
                     <h2
-                        className="mx-auto max-w-[760px] text-[34px] font-bold leading-[1.1] tracking-[-1px] md:text-[48px]"
+                        className="mx-auto max-w-190 text-[34px] font-bold leading-[1.1] tracking-[-1px] md:text-[48px]"
                         style={{ color: "var(--theme-heading)" }}
                     >
                         {services.heading}
@@ -51,7 +51,7 @@ export default function ServicesSection() {
                         return (
                             <div
                                 key={index}
-                                className="group relative flex min-h-[362px] flex-col overflow-hidden rounded-[28px] border bg-white p-8 shadow-[0_14px_34px_rgba(15,23,42,0.06)] transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(0,0,0,0.14)]"
+                                className="group relative flex min-h-90 flex-col overflow-hidden rounded-[28px] border bg-white p-8 shadow-[0_14px_34px_rgba(15,23,42,0.06)] transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(0,0,0,0.14)]"
                                 style={{ borderColor: "rgba(16,17,20,0.08)" }}
                             >
                                 <div className="absolute inset-0 z-0 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100">
@@ -83,14 +83,14 @@ export default function ServicesSection() {
                                         </div>
 
                                         <h3
-                                            className="mb-4 max-w-[240px] text-[22px] font-bold leading-[1.18] transition-colors duration-500 group-hover:text-white"
+                                            className="mb-4 max-w-60 text-[22px] font-bold leading-[1.18] transition-colors duration-500 group-hover:text-white"
                                             style={{ color: "var(--theme-heading)" }}
                                         >
                                             {service.title}
                                         </h3>
 
                                         <p
-                                            className="service-description max-w-[245px] text-[14px] leading-[1.75] transition-colors duration-500"
+                                            className="service-description max-w-60 text-[14px] leading-[1.75] transition-colors duration-500"
                                             style={{ color: "var(--theme-text-muted)" }}
                                         >
                                             {service.description}
@@ -112,7 +112,7 @@ export default function ServicesSection() {
                                             >
                                                 <ArrowUpRight
                                                     size={16}
-                                                    className="transition-transform duration-500 ease-out group-hover:rotate-45"
+                                                    className="transition-transform duration-800 ease-out group-hover:rotate-45"
                                                 />
                                             </span>
                                         </button>
@@ -121,7 +121,7 @@ export default function ServicesSection() {
 
                                 <div className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                                     <div
-                                        className="m-4 h-[calc(100%-2rem)] rounded-[24px]"
+                                        className="m-4 h-[calc(100%-2rem)] rounded-3xl"
                                         style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)" }}
                                     />
                                 </div>
@@ -159,7 +159,7 @@ export default function ServicesSection() {
                         </div>
 
                         <p
-                            className="max-w-[540px] text-sm"
+                            className="max-w-135 text-sm"
                             style={{ color: "var(--theme-text-muted)" }}
                         >
                             {services.summary} -{" "}
