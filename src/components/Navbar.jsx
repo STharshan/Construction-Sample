@@ -7,22 +7,12 @@ const Navbar = ({ overlay = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { branding, navigation } = siteConfig;
 
-  const linkMouseEnter = (event) => {
-    event.currentTarget.style.color = "var(--theme-accent-strong)";
-  };
-
-  const linkMouseLeave = (event) => {
-    event.currentTarget.style.color = "";
-  };
-
-  const buttonMouseEnter = (event) => {
-    event.currentTarget.style.backgroundColor = "var(--theme-accent-strong)";
-    event.currentTarget.style.color = "var(--theme-primary-strong)";
-  };
-
-  const buttonMouseLeave = (event) => {
-    event.currentTarget.style.backgroundColor = "var(--theme-primary)";
-    event.currentTarget.style.color = "#ffffff";
+  // Optimized smooth scroll helper that ensures the mobile menu closes seamlessly
+  const handleScroll = (el) => {
+    const yOffset = -80;
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+    setIsOpen(false);
   };
 
   return (
@@ -50,6 +40,7 @@ const Navbar = ({ overlay = false }) => {
           />
         </HashLink>
 
+        {/* Desktop Links: Handled via safe CSS-driven hover effects */}
         <nav
           className={`hidden items-center text-[1.05rem] font-medium xl:flex ${
             overlay ? "gap-10" : "gap-8"
@@ -61,39 +52,31 @@ const Navbar = ({ overlay = false }) => {
               key={link.href}
               smooth
               to={`/#${link.href}`}
-              scroll={(el) => {
-                const yOffset = -80;
-                const y =
-                  el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                window.scrollTo({ top: y, behavior: "smooth" });
-                setIsOpen(false);
-              }}
-              className="transition-colors duration-200"
-              onMouseEnter={linkMouseEnter}
-              onMouseLeave={linkMouseLeave}
+              scroll={handleScroll}
+              className="transition-colors duration-200 hover:text-[var(--theme-accent-strong)]"
             >
               {link.label}
             </HashLink>
           ))}
         </nav>
 
+        {/* Desktop CTA Button */}
         <div className="hidden items-center gap-6 xl:flex">
           <a
             href={branding.primaryCtaHref}
-            className={`group inline-flex items-center gap-3 rounded-full font-semibold text-white transition-colors duration-200 ${
+            className={`group inline-flex items-center gap-3 rounded-full font-semibold text-white transition-all duration-200 hover:bg-[var(--theme-accent-strong)] hover:text-[var(--theme-primary-strong)] ${
               overlay ? "px-6 py-3 text-sm lg:px-8 lg:text-base" : "px-6 py-3"
             }`}
             style={{ backgroundColor: "var(--theme-accent)" }}
-            onMouseEnter={buttonMouseEnter}
-            onMouseLeave={buttonMouseLeave}
           >
             {branding.primaryCtaLabel}
             <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
           </a>
         </div>
 
+        {/* Hamburger Trigger with touch feedback scales */}
         <button
-          className="xl:hidden"
+          className="transition-transform duration-200 active:scale-95 xl:hidden"
           style={{ color: "var(--theme-text)" }}
           onClick={() => setIsOpen(!isOpen)}
         >
@@ -101,9 +84,10 @@ const Navbar = ({ overlay = false }) => {
         </button>
       </div>
 
+      {/* Mobile Drawer Section */}
       {isOpen && (
         <div
-          className={`app-container mt-3 flex flex-col gap-4 px-6 shadow-[0_20px_60px_rgba(15,23,42,0.14)] xl:hidden ${
+          className={`app-container nav-mobile-fade-in mt-3 flex flex-col gap-4 px-6 shadow-[0_20px_60px_rgba(15,23,42,0.14)] xl:hidden ${
             overlay
               ? "rounded-4xl border py-6 text-base"
               : "items-center rounded-4xl border py-6 text-lg"
@@ -119,34 +103,43 @@ const Navbar = ({ overlay = false }) => {
               key={link.href}
               smooth
               to={`/#${link.href}`}
-              scroll={(el) => {
-                const yOffset = -80;
-                const y =
-                  el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                window.scrollTo({ top: y, behavior: "smooth" });
-                setIsOpen(false);
-              }}
-              className="font-medium transition-colors duration-200"
-              onMouseEnter={linkMouseEnter}
-              onMouseLeave={linkMouseLeave}
+              scroll={handleScroll}
+              className="w-full text-center font-medium transition-colors duration-200 py-1 active:text-[var(--theme-accent-strong)]"
             >
               {link.label}
             </HashLink>
           ))}
+          
+          {/* Mobile Target CTA with active touch press effect */}
           <a
             href={branding.primaryCtaHref}
-            className={`group inline-flex items-center justify-center gap-3 rounded-full font-semibold text-white transition-colors duration-200 ${
-              overlay ? "mt-2 w-full py-3 text-sm" : "px-5 py-3"
+            className={`group inline-flex items-center justify-center gap-3 rounded-full font-semibold text-white transition-all duration-200 active:scale-[0.98] active:bg-[var(--theme-accent-strong)] active:text-[var(--theme-primary-strong)] ${
+              overlay ? "mt-2 w-full py-3 text-sm" : "px-5 py-3 w-full"
             }`}
             style={{ backgroundColor: "var(--theme-accent)" }}
-            onMouseEnter={buttonMouseEnter}
-            onMouseLeave={buttonMouseLeave}
           >
             {branding.primaryCtaLabel}
-            <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
+            <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-active:rotate-45" />
           </a>
         </div>
       )}
+
+      <style>{`
+        @keyframes navSlideIn {
+          from {
+            opacity: 0;
+            transform: translate3d(0, -10px, 0);
+          }
+          to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+        .nav-mobile-fade-in {
+          will-change: transform, opacity;
+          animation: navSlideIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+      `}</style>
     </header>
   );
 };

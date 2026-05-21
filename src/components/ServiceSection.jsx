@@ -51,10 +51,12 @@ export default function ServicesSection() {
                         return (
                             <div
                                 key={index}
-                                className="group relative flex min-h-90 flex-col overflow-hidden rounded-[28px] border bg-white p-8 shadow-[0_14px_34px_rgba(15,23,42,0.06)] transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(0,0,0,0.14)]"
+                                // Added active: scale changes for haptic-like finger tracking on mobile screens
+                                className="group relative flex min-h-90 flex-col overflow-hidden rounded-[28px] border bg-white p-8 shadow-[0_14px_34px_rgba(15,23,42,0.06)] transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(0,0,0,0.14)] active:scale-[0.99] active:shadow-[0_22px_60px_rgba(0,0,0,0.14)]"
                                 style={{ borderColor: "rgba(16,17,20,0.08)" }}
                             >
-                                <div className="absolute inset-0 z-0 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100">
+                                {/* Background Image container reacts to hover OR active touch down flags */}
+                                <div className="absolute inset-0 z-0 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-active:opacity-100">
                                     <img
                                         src={service.image}
                                         alt={`${service.title} by ${branding.companyName}`}
@@ -71,7 +73,7 @@ export default function ServicesSection() {
                                 </div>
 
                                 <div className="relative z-10 flex flex-1 flex-col justify-between">
-                                    <div className="transition-all duration-500 group-hover:translate-y-1">
+                                    <div className="transition-all duration-500 group-hover:translate-y-1 group-active:translate-y-1">
                                         <div
                                             className="service-icon mb-8 flex h-14 w-14 items-center justify-center rounded-full transition-all duration-500 ease-out"
                                             style={{
@@ -82,8 +84,9 @@ export default function ServicesSection() {
                                             <Icon size={24} />
                                         </div>
 
+                                        {/* Added matching group-active color transformations so text changes instantly on touch */}
                                         <h3
-                                            className="mb-4 max-w-60 text-[22px] font-bold leading-[1.18] transition-colors duration-500 group-hover:text-white"
+                                            className="mb-4 max-w-60 text-[22px] font-bold leading-[1.18] transition-colors duration-500 group-hover:text-white group-active:text-white"
                                             style={{ color: "var(--theme-heading)" }}
                                         >
                                             {service.title}
@@ -112,41 +115,46 @@ export default function ServicesSection() {
                                             >
                                                 <ArrowUpRight
                                                     size={16}
-                                                    className="transition-transform duration-800 ease-out group-hover:rotate-45"
+                                                    className="transition-transform duration-800 ease-out group-hover:rotate-45 group-active:rotate-45"
                                                 />
                                             </span>
                                         </button>
                                     </div>
                                 </div>
 
-                                <div className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                                <div className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-active:opacity-100">
                                     <div
                                         className="m-4 h-[calc(100%-2rem)] rounded-3xl"
                                         style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)" }}
                                     />
                                 </div>
 
+                                {/* Updated CSS custom handlers to listen for modern responsive touch triggers */}
                                 <style>{`
-                  .group:hover .service-icon,
-                  .group:hover .service-arrow {
-                    background-color: var(--theme-accent) !important;
-                    color: #0b1224 !important;
-                  }
-                  .group:hover .service-description {
-                    color: rgba(255, 255, 255, 0.92) !important;
-                  }
-                  .group:hover .service-cta {
-                    color: rgba(255, 255, 255, 1) !important;
-                  }
-                `}</style>
-              </div>
+                                    .group:hover .service-icon,
+                                    .group:hover .service-arrow,
+                                    .group:active .service-icon,
+                                    .group:active .service-arrow {
+                                        background-color: var(--theme-accent) !important;
+                                        color: #0b1224 !important;
+                                    }
+                                    .group:hover .service-description,
+                                    .group:active .service-description {
+                                        color: rgba(255, 255, 255, 0.92) !important;
+                                    }
+                                    .group:hover .service-cta,
+                                    .group:active .service-cta {
+                                        color: rgba(255, 255, 255, 1) !important;
+                                    }
+                                `}</style>
+                            </div>
                         );
                     })}
                 </div>
 
                 <div className="mt-14 flex flex-col items-center justify-center gap-5 text-center">
                     <div className="flex items-center gap-3">
-                        <div className="flex -space-x-3">
+                        <div className="hidden md:flex -space-x-3">
                             {services.clients.map((client) => (
                                 <img
                                     key={client.alt}

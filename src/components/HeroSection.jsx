@@ -94,20 +94,21 @@ const HeroSection = () => {
             </div>
 
             <div className="flex flex-col justify-end">
+              {/* Adjusted mobile grid alignment to look cleaner during the reveal animation */}
               <div
-                className="hero-reveal grid gap-6 sm:grid-cols-3 sm:gap-0"
+                className="hero-reveal grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 sm:gap-0"
                 style={{ animationDelay: "0.56s" }}
               >
                 {hero.stats.map((stat, index) => (
                   <div
                     key={stat.label}
-                    className="hero-stat relative py-5 sm:px-8 sm:py-0"
+                    className="hero-stat relative py-2 sm:px-8 sm:py-0"
                     style={{ animationDelay: `${0.68 + index * 0.12}s` }}
                   >
-                    <p className="text-5xl font-semibold tracking-tight text-white lg:text-[3.5rem]">
+                    <p className="text-4xl font-semibold tracking-tight text-white min-[380px]:text-5xl lg:text-[3.5rem]">
                       <CounterValue value={stat.value} suffix={stat.suffix} />
                     </p>
-                    <p className="mt-4 text-base text-white/86 lg:text-[0.9rem]">
+                    <p className="mt-2 text-sm text-white/86 sm:mt-4 lg:text-[0.9rem]">
                       {stat.label}
                     </p>
 
@@ -123,18 +124,19 @@ const HeroSection = () => {
                 style={{ animationDelay: "0.92s" }}
               >
                 <div className="flex flex-col gap-10 sm:flex-row sm:items-center">
+                  {/* Added active: classes for crisp, instant mobile touch feedback alongside desktop hover states */}
                   <a
                     href={branding.primaryCtaHref}
-                    className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-white px-5 py-3 text-base font-semibold text-[#0B1224] transition-colors duration-300 min-[420px]:w-fit sm:px-8"
+                    className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-white px-5 py-3 text-base font-semibold text-[#0B1224] transition-all duration-300 active:scale-[0.98] min-[420px]:w-fit sm:px-8"
                   >
                     <span
-                      className="absolute inset-0 translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0"
+                      className="absolute inset-0 translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0 group-active:translate-y-0"
                       style={{ backgroundColor: "var(--theme-accent)" }}
                     />
 
                     <span className="relative z-10 inline-flex items-center gap-3 transition-colors duration-300">
                       {branding.primaryCtaLabel}
-                      <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
+                      <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:rotate-45 group-active:rotate-45" />
                     </span>
                   </a>
 
@@ -168,7 +170,7 @@ const HeroSection = () => {
         @keyframes fadeInUp {
           from {
             opacity: 0;
-            transform: translate3d(0, 28px, 0);
+            transform: translate3d(0, 20px, 0); /* Reduced slightly from 28px for smoother mobile tracking */
           }
           to {
             opacity: 1;
