@@ -1,7 +1,7 @@
 export const siteConfig = {
   branding: {
     companyName: "Empire Scaffolding",
-    logo: "/Logo-bg.png",
+    logo: "/logo.png",
     logoAlt: "Logo",
     primaryCtaLabel: "Get a Free Quote",
     primaryCtaHref: "mailto:Shay@empirescaffolding.co.uk",
