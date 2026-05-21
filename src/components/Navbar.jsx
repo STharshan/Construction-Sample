@@ -83,7 +83,7 @@ const Navbar = ({ overlay = false }) => {
             className={`group inline-flex items-center gap-3 rounded-full font-semibold text-white transition-colors duration-200 ${
               overlay ? "px-6 py-3 text-sm lg:px-8 lg:text-base" : "px-6 py-3"
             }`}
-            style={{ backgroundColor: "var(--theme-primary)" }}
+            style={{ backgroundColor: "var(--theme-accent)" }}
             onMouseEnter={buttonMouseEnter}
             onMouseLeave={buttonMouseLeave}
           >
@@ -138,7 +138,7 @@ const Navbar = ({ overlay = false }) => {
             className={`group inline-flex items-center justify-center gap-3 rounded-full font-semibold text-white transition-colors duration-200 ${
               overlay ? "mt-2 w-full py-3 text-sm" : "px-5 py-3"
             }`}
-            style={{ backgroundColor: "var(--theme-primary)" }}
+            style={{ backgroundColor: "var(--theme-accent)" }}
             onMouseEnter={buttonMouseEnter}
             onMouseLeave={buttonMouseLeave}
           >

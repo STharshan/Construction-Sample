@@ -129,7 +129,7 @@ const HeroSection = () => {
                   >
                     <span
                       className="absolute inset-0 translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0"
-                      style={{ backgroundColor: "var(--theme-accent-soft)" }}
+                      style={{ backgroundColor: "var(--theme-accent)" }}
                     />
 
                     <span className="relative z-10 inline-flex items-center gap-3 transition-colors duration-300">
