@@ -1,61 +1,57 @@
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { siteConfig } from "../global";
 
-const footerLinks = [
-  { label: "Home", href: "#top" },
-  { label: "Services", href: "#services" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
-];
-
-const socialLinks = [
-  { label: "Facebook", href: "https://facebook.com", icon: FaFacebookF },
-  { label: "Instagram", href: "https://instagram.com", icon: FaInstagram },
-];
+const socialIcons = {
+  facebook: FaFacebookF,
+  instagram: FaInstagram,
+};
 
 export default function FooterSection() {
+  const { footer, navigation } = siteConfig;
+
   return (
-    <footer className="app-section bg-black py-16 text-white sm:py-20">
+    <footer className="app-section bg-black py-16 text-white">
       <div className="app-container">
         <div className="grid gap-12 border-b border-white/12 pb-14 sm:grid-cols-2 xl:grid-cols-4 xl:gap-16">
           <div>
             <h2 className="max-w-[280px] text-[1.5rem] font-semibold uppercase leading-[1.2] tracking-[0.03em]">
-              Hello, We Are AW Detailing
+              {footer.introTitle}
             </h2>
             <p className="mt-10 max-w-[320px] text-[1.05rem] leading-9 text-white/74">
-              Our experienced technicians provide quality services for your car.
+              {footer.introDescription}
             </p>
           </div>
 
           <div>
             <h3 className="text-[1.5rem] font-semibold uppercase tracking-[0.03em]">
-              Office
+              {footer.officeTitle}
             </h3>
             <div className="mt-10 space-y-7 text-[1.05rem] text-white/78">
-              <p>Yorkshire</p>
+              <p>{footer.officeLocation}</p>
               <a
-                href="mailto:office@-nottingham.co.uk"
+                href={`mailto:${footer.officeEmail}`}
                 className="block transition-colors duration-200 hover:text-white"
               >
-                office@-nottingham.co.uk
+                {footer.officeEmail}
               </a>
               <a
-                href="tel:07494397582"
+                href={`tel:${footer.officePhone.replace(/\s+/g, "")}`}
                 className="block text-[1.2rem] font-semibold tracking-tight text-white transition-colors duration-200 hover:text-white/80"
               >
-                07494 397582
+                {footer.officePhone}
               </a>
             </div>
           </div>
 
           <div>
             <h3 className="text-[1.5rem] font-semibold uppercase tracking-[0.03em]">
-              Links
+              {footer.linksTitle}
             </h3>
             <nav className="mt-10 flex flex-col gap-6 text-[1.05rem] text-white/78">
-              {footerLinks.map((link) => (
+              {navigation.links.slice(0, 4).map((link) => (
                 <a
                   key={link.label}
-                  href={link.href}
+                  href={`#${link.href}`}
                   className="transition-colors duration-200 hover:text-white"
                 >
                   {link.label}
@@ -66,12 +62,12 @@ export default function FooterSection() {
 
           <div>
             <h3 className="text-[1.5rem] font-semibold uppercase tracking-[0.03em]">
-              Get In Touch
+              {footer.socialTitle}
             </h3>
             <div className="mt-10 flex flex-col gap-6">
-              {socialLinks.map((link) => {
-                const SocialIcon = link.icon;
-                
+              {footer.socialLinks.map((link) => {
+                const SocialIcon = socialIcons[link.icon];
+
                 return (
                   <a
                     key={link.label}
@@ -90,8 +86,10 @@ export default function FooterSection() {
         </div>
 
         <div className="flex flex-col gap-5 pt-8 text-sm text-white/72 sm:flex-row sm:items-center sm:justify-between">
-          <p>AW Detailing (c) 2026. All rights reserved.</p>
-          <p>Powered by Ansely</p>
+          <p>
+            {footer.brandName} (c) {footer.copyrightYear}. All rights reserved.
+          </p>
+          <p>{footer.poweredBy}</p>
         </div>
       </div>
     </footer>

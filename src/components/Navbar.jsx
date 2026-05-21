@@ -1,126 +1,154 @@
 import { useState } from "react";
-import { Phone, Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { HashLink } from "react-router-hash-link";
-
-const navLinks = [
-    { label: "About", href: "about" },
-    { label: "Services", href: "services" },
-    { label: "Recent Projects", href: "projects" },
-    { label: "Why Choose Us", href: "why-choose-us" },
-    { label: "Testimonials", href: "testimonials" },
-    { label: "Contact", href: "contact" },
-];
+import { siteConfig } from "../global";
 
 const Navbar = ({ overlay = false }) => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const { branding, navigation } = siteConfig;
 
-    // Handle phone call
-    const handleCall = () => {
-        console.log("Calling 0115 9641 600");
-    };
+  const linkMouseEnter = (event) => {
+    event.currentTarget.style.color = "var(--theme-accent-strong)";
+  };
 
-    return (
-        <header
-            className={`app-section inset-x-0 z-50 w-full ${overlay ? "absolute top-4 sm:top-6" : "fixed top-4 left-0 sm:top-5"
-                }`}
+  const linkMouseLeave = (event) => {
+    event.currentTarget.style.color = "";
+  };
+
+  const buttonMouseEnter = (event) => {
+    event.currentTarget.style.backgroundColor = "var(--theme-accent-strong)";
+    event.currentTarget.style.color = "var(--theme-primary-strong)";
+  };
+
+  const buttonMouseLeave = (event) => {
+    event.currentTarget.style.backgroundColor = "var(--theme-primary)";
+    event.currentTarget.style.color = "#ffffff";
+  };
+
+  return (
+    <header
+      className={`app-section inset-x-0 z-50 w-full ${
+        overlay ? "absolute top-4 sm:top-6" : "fixed top-4 left-0 sm:top-5"
+      }`}
+    >
+      <div
+        className={`app-container flex items-center justify-between ${
+          overlay
+            ? "rounded-[1.4rem] border px-4 py-4 shadow-[0_20px_60px_rgba(15,23,42,0.15)] sm:rounded-[2rem] sm:px-8 lg:rounded-[2.6rem] lg:px-10"
+            : "rounded-full border px-4 py-3 shadow-[0_18px_60px_rgba(15,23,42,0.16)] backdrop-blur-md sm:px-7 lg:px-10"
+        }`}
+        style={{
+          backgroundColor: "var(--theme-page-bg)",
+          borderColor: "var(--theme-border)",
+        }}
+      >
+        <HashLink smooth to="/#top" className="flex items-center">
+          <img
+            src={branding.logo}
+            alt={branding.logoAlt}
+            className="h-11 w-auto object-contain sm:h-12 lg:h-14"
+          />
+        </HashLink>
+
+        <nav
+          className={`hidden items-center text-[1.05rem] font-medium xl:flex ${
+            overlay ? "gap-10" : "gap-8"
+          }`}
+          style={{ color: "var(--theme-text)" }}
         >
-            <div
-                className={`app-container flex items-center justify-between ${overlay
-                    ? "rounded-[1.4rem] border border-white/80 bg-white px-4 py-4 shadow-[0_20px_60px_rgba(15,23,42,0.15)] sm:rounded-[2rem] sm:px-8 lg:rounded-[2.6rem] lg:px-10"
-                    : "rounded-full border border-slate-200/80 bg-white/95 px-4 py-3 shadow-[0_18px_60px_rgba(15,23,42,0.16)] backdrop-blur-md sm:px-7 lg:px-10"
-                    }`}
+          {navigation.links.map((link) => (
+            <HashLink
+              key={link.href}
+              smooth
+              to={`/#${link.href}`}
+              scroll={(el) => {
+                const yOffset = -80;
+                const y =
+                  el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: "smooth" });
+                setIsOpen(false);
+              }}
+              className="transition-colors duration-200"
+              onMouseEnter={linkMouseEnter}
+              onMouseLeave={linkMouseLeave}
             >
-                <div className="flex items-center">
-                    <HashLink smooth to="/#top" className="flex items-center">
-                        <img
-                            src="/Logo-bg.png"
-                            alt="Empire Scaffolding Logo"
-                            className="h-11 w-auto object-contain sm:h-12 lg:h-14"
-                        />
-                    </HashLink>
-                </div>
+              {link.label}
+            </HashLink>
+          ))}
+        </nav>
 
-                <nav
-                    className={`hidden items-center text-[1.05rem] font-medium xl:flex ${overlay ? "gap-10 text-slate-700" : "gap-8 text-slate-900"
-                        }`}
-                >
-                    {navLinks.map((link) => (
-                        <HashLink
-                            key={link.href}
-                            smooth
-                            to={`/#${link.href}`}
-                            scroll={(el) => {
-                                const yOffset = -80; // height of your fixed navbar
-                                const y =
-                                    el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                                window.scrollTo({ top: y, behavior: "smooth" });
-                                setIsOpen(false); // close mobile menu
-                            }}
-                            className="transition hover:text-blue-600"
-                        >
-                            {link.label}
-                        </HashLink>
-                    ))}
-                </nav>
+        <div className="hidden items-center gap-6 xl:flex">
+          <a
+            href={branding.primaryCtaHref}
+            className={`group inline-flex items-center gap-3 rounded-full font-semibold text-white transition-colors duration-200 ${
+              overlay ? "px-6 py-3 text-sm lg:px-8 lg:text-base" : "px-6 py-3"
+            }`}
+            style={{ backgroundColor: "var(--theme-primary)" }}
+            onMouseEnter={buttonMouseEnter}
+            onMouseLeave={buttonMouseLeave}
+          >
+            {branding.primaryCtaLabel}
+            <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
+          </a>
+        </div>
 
-                <div className="hidden items-center gap-6 xl:flex">
-                    <a
-                        href="mailto:Shay@empirescaffolding.co.uk"
-                        className={`group inline-flex items-center gap-3 rounded-full bg-[#0B1224] font-semibold text-white transition hover:bg-blue-800 ${overlay ? "px-6 py-3 text-sm lg:px-8 lg:text-base" : "px-6 py-3"
-                            }`}
-                    >
-                        Get a Free Quote
-                        <ArrowUpRight className="btn-arrow h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
-                    </a>
-                </div>
+        <button
+          className="xl:hidden"
+          style={{ color: "var(--theme-text)" }}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </div>
 
-                <button
-                    className={`xl:hidden ${overlay ? "text-slate-900" : "text-slate-900"}`}
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                </button>
-            </div>
-
-            {isOpen && (
-                <div
-                    className={`app-container mt-3 flex flex-col gap-4 bg-white px-6 text-slate-900 shadow-[0_20px_60px_rgba(15,23,42,0.14)] xl:hidden ${overlay
-                        ? "rounded-[2rem] border border-slate-200 py-6 text-base"
-                        : "items-center rounded-[2rem] border border-slate-200 py-6 text-lg"
-                        }`}
-                >
-                    {navLinks.map((link) => (
-                        <HashLink
-                            key={link.href}
-                            smooth
-                            to={`/#${link.href}`}
-                            scroll={(el) => {
-                                const yOffset = -80; // height of your fixed navbar
-                                const y =
-                                    el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                                window.scrollTo({ top: y, behavior: "smooth" });
-                                setIsOpen(false); // close mobile menu
-                            }}
-                            className={`font-medium transition hover:text-blue-600 ${overlay ? "text-slate-700" : ""
-                                }`}
-                        >
-                            {link.label}
-                        </HashLink>
-                    ))}
-                    <a
-                        href="mailto:Shay@empirescaffolding.co.uk"
-                        className={`group inline-flex items-center justify-center gap-3 rounded-full bg-[#0B1224] font-semibold text-white transition hover:bg-blue-800 ${overlay
-                                ? "mt-2 w-full py-3 text-sm"
-                                : "px-5 py-3"
-                            }`}
-                    >
-                        Get a Free Quote
-                        <ArrowUpRight className="btn-arrow h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
-                    </a>
-                </div>
-            )}
-        </header>
-    );
+      {isOpen && (
+        <div
+          className={`app-container mt-3 flex flex-col gap-4 px-6 shadow-[0_20px_60px_rgba(15,23,42,0.14)] xl:hidden ${
+            overlay
+              ? "rounded-[2rem] border py-6 text-base"
+              : "items-center rounded-[2rem] border py-6 text-lg"
+          }`}
+          style={{
+            backgroundColor: "var(--theme-surface)",
+            color: "var(--theme-text)",
+            borderColor: "var(--theme-border)",
+          }}
+        >
+          {navigation.links.map((link) => (
+            <HashLink
+              key={link.href}
+              smooth
+              to={`/#${link.href}`}
+              scroll={(el) => {
+                const yOffset = -80;
+                const y =
+                  el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: "smooth" });
+                setIsOpen(false);
+              }}
+              className="font-medium transition-colors duration-200"
+              onMouseEnter={linkMouseEnter}
+              onMouseLeave={linkMouseLeave}
+            >
+              {link.label}
+            </HashLink>
+          ))}
+          <a
+            href={branding.primaryCtaHref}
+            className={`group inline-flex items-center justify-center gap-3 rounded-full font-semibold text-white transition-colors duration-200 ${
+              overlay ? "mt-2 w-full py-3 text-sm" : "px-5 py-3"
+            }`}
+            style={{ backgroundColor: "var(--theme-primary)" }}
+            onMouseEnter={buttonMouseEnter}
+            onMouseLeave={buttonMouseLeave}
+          >
+            {branding.primaryCtaLabel}
+            <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:rotate-45" />
+          </a>
+        </div>
+      )}
+    </header>
+  );
 };
 
 export default Navbar;
